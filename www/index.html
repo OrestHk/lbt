@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/style.min.css">
+    <title>LBT</title>
+  </head>
+  <body>
+
+    <div class="app">
+      <!-- Splash -->
+      <div class="splash screen">
+        <div class="content">
+          <p class="title">LBT</p>
+        </div>
+      </div>
+      <!-- End splash -->
+
+      <!-- Loader -->
+      <div class="loader screen">
+        <div class="content">
+          <p class="text">Looking through your deepest secrets</p>
+        </div>
+      </div>
+      <!-- End loader -->
+
+      <!-- Main menu -->
+      <div class="main-menu screen">
+        <div class="content">
+          <p class="title">LBT</p>
+          <!--<p class="greeting">
+            <span class="message"></span>
+            <span class="name"></span>
+          </p>-->
+          <button class="btn btn-disabled load-game">Load game</button>
+          <button class="btn new-game">New game</button>
+          <button class="btn show-options">Options</button>
+        </div>
+      </div>
+      <!-- End main menu -->
+
+      <!-- Game -->
+      <div class="game screen">
+        <div class="content">
+          <p class="text-container score-container">
+            Score : <span class="score"></span>
+          </p>
+          <p class="text-container found-container">
+            Musics found : <span class="found"></span>/<span class="total"></span>
+          </p>
+          <div class="choices"></div>
+        </div>
+      </div>
+      <!-- End game -->
+
+      <!-- Options -->
+      <div class="options screen">
+        <button class="btn return-menu">Main menu</button>
+        <button class="btn refresh-music">Refresh music list</button>
+      </div>
+      <!-- End options -->
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/libs.min.js"></script>
+    <script type="text/javascript" src="js/script.min.js"></script>
+  </body>
+</html>

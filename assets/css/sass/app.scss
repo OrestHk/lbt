@@ -1,0 +1,21 @@
+@import 'settings/conf';
+
+// App
+.app{
+  // Screen
+  .screen{
+    // Splash screen
+    &.splash{
+      display: block;
+      .title{font-size: 60px;}
+    }
+    // Main menu
+    &.main-menu{
+      .title{
+        font-size: 46px;
+        margin-bottom: 30px;
+      }
+      .btn{margin-bottom: 15px;}
+    }
+  }
+}

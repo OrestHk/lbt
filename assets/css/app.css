@@ -1,0 +1,11 @@
+.app .screen.splash {
+  display: block; }
+  .app .screen.splash .title {
+    font-size: 60px; }
+
+.app .screen.main-menu .title {
+  font-size: 46px;
+  margin-bottom: 30px; }
+
+.app .screen.main-menu .btn {
+  margin-bottom: 15px; }
