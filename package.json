@@ -1,7 +1,7 @@
 {
-  "name": "gulp",
+  "name": "LBT",
   "version": "0.0.1",
-  "description": "Gulp model",
+  "description": "LBT gulpfile",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,7 @@
   "author": "OrestHk <hrynchuk.orest@gmail.com>",
   "license": "ISC",
   "devDependencies": {
+    "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-cssnano": "^2.1.0",
