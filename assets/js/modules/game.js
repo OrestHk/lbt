@@ -1,11 +1,15 @@
 var game = {
   // Game parameters
+  started: false,
   choices: 4, // Number of available answers
   // Methods
   // Start game
   start: function(){
-    // Enable controls
-    this.controls();
+    // Enable controls if initial start
+    if(!this.started)
+      this.controls();
+    // Game started
+    this.started = true;
     // Show main menu
     display.show(true, 'main-menu', false, true);
   },
@@ -26,6 +30,17 @@ var game = {
       _this.pause();
       // Show main menu
       display.show(true, 'main-menu', false, true);
+      // Hide overlays
+      display.slide('hide');
+    });
+    // Refresh musics list
+    $(".options .refresh-music").click(function(){
+      // Show main menu
+      display.show(true, 'loader', function(){
+        scan.listDirectories(function(){
+          console.log('Musics refreshed');
+        });
+      }, true);
       // Hide overlays
       display.slide('hide');
     });

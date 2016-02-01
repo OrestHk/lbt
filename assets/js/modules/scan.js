@@ -8,11 +8,12 @@ var scan = {
   directories: [], // Directories to scan
   musics: [], // Musics found ont the device
   // List directories in which we'll look for the files we want
-  listDirectories: function(){
+  listDirectories: function(callback){
     var _this = this;
     var directory;
     // In case the user wants to refresh his inapp song list
-    this.finished = false;
+    this.resetScan();
+    //console.log(this.folders, this.files, this.scannedFolders, this.scannedFiles, this.finished, this.directories.length, this.musics.length);
     // Show loader
     display.show(true, 'loader', function(){
       // Loop through cordova.file directories
@@ -27,24 +28,24 @@ var scan = {
 
         _this.directories.push(current);
       }
-      _this.initScan();
+      _this.initScan(callback);
     }, true);
   },
   // Launch scan for each principal directories
-  initScan: function(){
+  initScan: function(callback){
     var _this = this;
     var i = 0;
     var nbDirectories = this.directories.length;
     for(i; i < nbDirectories; i++){
       var directory = this.directories[i];
-      window.resolveLocalFileSystemURL(directory, function(dir, callback){
+      window.resolveLocalFileSystemURL(directory, function(dir, cb){
         _this.folders++;
-        _this.scanDirectory(dir);
+        _this.scanDirectory(dir, callback);
       });
     }
   },
   // Scan the given directory for files or other directories
-  scanDirectory: function(directory){
+  scanDirectory: function(directory, callback){
     var _this = this;
     // Initiate a reader
     var reader = directory.createReader();
@@ -58,12 +59,12 @@ var scan = {
         // If entry is a directory, scan the directory
         if(entry.isDirectory){
           _this.folders++;
-          _this.scanDirectory(entry);
+          _this.scanDirectory(entry, callback);
         }
         // If entry is a file, check type
         else{
           // If it's an audio file add it to the musics
-          window.resolveLocalFileSystemURL(entry.nativeURL, function(file, callback){
+          window.resolveLocalFileSystemURL(entry.nativeURL, function(file, cb){
             _this.files++;
             file.file(function(file){
               // Check if file type is defined
@@ -78,6 +79,9 @@ var scan = {
               if(_this.scannedFiles == _this.files && _this.scannedFolders == _this.folders && !_this.finished){
                 _this.finished = true;
                 _this.returnApp();
+                if(callback)
+                  callback();
+                //console.log(_this.folders, _this.files, _this.scannedFolders, _this.scannedFiles, _this.finished, _this.directories.length, _this.musics.length);
               }
             });
           });
@@ -92,8 +96,21 @@ var scan = {
       if(_this.scannedFiles == _this.files && _this.scannedFolders == _this.folders && !_this.finished){
         _this.finished = true;
         _this.returnApp();
+        if(callback)
+          callback();
+        //console.log(_this.folders, _this.files, _this.scannedFolders, _this.scannedFiles, _this.finished, _this.directories.length, _this.musics.length);
       }
     });
+  },
+  // Reset scan datas
+  resetScan: function(){
+    this.folders = 0;
+    this.files = 0;
+    this.scannedFolders = 0;
+    this.scannedFiles = 0;
+    this.finished = false;
+    this.directories = [];
+    this.musics = [];
   },
   // Return what was found to the app
   returnApp: function(){
