@@ -9,3 +9,30 @@
 
 .app .screen.main-menu .btn {
   margin-bottom: 15px; }
+
+.app .overlay.options {
+  left: -100%;
+  display: block; }
+  .app .overlay.options .close {
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 10px;
+    position: absolute; }
+    .app .overlay.options .close:after, .app .overlay.options .close:before {
+      left: 0;
+      top: 50%;
+      height: 10%;
+      width: 100%;
+      content: '';
+      position: absolute;
+      background-color: #fff;
+      transform-origin: 50% 50%; }
+    .app .overlay.options .close:after {
+      transform: translateY(-50%) rotate(45deg); }
+    .app .overlay.options .close:before {
+      transform: translateY(-50%) rotate(-45deg); }
+  .app .overlay.options .btn {
+    margin-bottom: 15px; }
+  .app .overlay.options .btn:last-of-type {
+    margin-bottom: 0; }

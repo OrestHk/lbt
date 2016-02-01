@@ -1,6 +1,4 @@
 var app = {
-  // App parameters
-  choices: 4, // Number of available answers
   // Methods
   // Launch app when device is ready
   init: function(){
@@ -11,7 +9,7 @@ var app = {
     var _this = app;
     // Check if scan already occured
     if(storage.getLocalStore())
-      console.log('Scan already occured');
+      game.start();
     // Launch device scan
     else
       scan.listDirectories();

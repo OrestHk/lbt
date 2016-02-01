@@ -13,20 +13,22 @@ var scan = {
     var directory;
     // In case the user wants to refresh his inapp song list
     this.finished = false;
-    // Display loader
-    // Loop through cordova.file directories
-    for(directory in cordova.file){
-      var current = cordova.file[directory];
-      if(current == null || typeof current == 'undefined')
-        continue;
+    // Show loader
+    display.show(true, 'loader', function(){
+      // Loop through cordova.file directories
+      for(directory in cordova.file){
+        var current = cordova.file[directory];
+        if(current == null || typeof current == 'undefined')
+          continue;
 
-      current = _this.stripDirectory(current);
-      if(_this.directories.indexOf(current) != -1)
-        continue;
+        current = _this.stripDirectory(current);
+        if(_this.directories.indexOf(current) != -1)
+          continue;
 
-      _this.directories.push(current);
-    }
-    _this.initScan();
+        _this.directories.push(current);
+      }
+      _this.initScan();
+    }, true);
   },
   // Launch scan for each principal directories
   initScan: function(){

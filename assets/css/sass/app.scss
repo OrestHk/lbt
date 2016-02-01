@@ -2,7 +2,7 @@
 
 // App
 .app{
-  // Screen
+  // Screens
   .screen{
     // Splash screen
     &.splash{
@@ -13,9 +13,38 @@
     &.main-menu{
       .title{
         font-size: 46px;
-        margin-bottom: 30px;
+        margin-bottom: $btnMargin * 2;
       }
-      .btn{margin-bottom: 15px;}
+      .btn{margin-bottom: $btnMargin;}
+    }
+  }
+  // Overlays
+  .overlay{
+    // Options
+    &.options{
+      left: -100%;
+      display: block;
+      .close{
+        width: 30px;
+        height: 30px;
+        top: $padding;
+        right: $padding;
+        position: absolute;
+        &:after, &:before{
+          left: 0;
+          top: 50%;
+          height: 10%;
+          width: 100%;
+          content: '';
+          position: absolute;
+          background-color: #fff;
+          transform-origin: 50% 50%;
+        }
+        &:after{transform: translateY(-50%) rotate(45deg);}
+        &:before{transform: translateY(-50%) rotate(-45deg);}
+      }
+      .btn{margin-bottom: $btnMargin;}
+      .btn:last-of-type{margin-bottom: 0;}
     }
   }
 }

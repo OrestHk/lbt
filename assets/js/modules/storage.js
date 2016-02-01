@@ -25,7 +25,7 @@ var storage = {
           // Check if all musics have been scanned
           if(treated == nbMusics){
             _this.localStore();
-            console.log('Scan finished, app ready to be launched');
+            game.start();
           }
         });
       });
