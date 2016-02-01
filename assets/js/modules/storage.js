@@ -19,8 +19,12 @@ var storage = {
         // Get file metadata
         music.file(function(file){
           // Check if music already exists in list
-          if(!_this.exist(file))
+          if(!_this.exist(file)){
+            // Add an id to the file
+            file.id = _this.musics.length;
+            // Push file into storage musics
             _this.musics.push(file);
+          }
           treated++;
           // Check if all musics have been scanned
           if(treated == nbMusics){

@@ -1,6 +1,6 @@
 var scan = {
   // Vars
-  debug: false,
+  debug: true,
   folders: 0, // Number of folder found during the scan
   files: 0, // Number of files found during the scan
   scannedFolders: 0, // Number of folder scanned
@@ -19,18 +19,22 @@ var scan = {
     display.show(true, 'loader', function(){
       // Loop through cordova.file directories
       for(directory in cordova.file){
+        // Get current directory
         var current = cordova.file[directory];
+        // If null or undefined, pass it
         if(current == null || typeof current == 'undefined')
           continue;
-
+        // Strip directory to make it usable
         current = _this.stripDirectory(current);
         if(_this.directories.indexOf(current) != -1)
           continue;
-
+        // Push it to directories to scan
         _this.directories.push(current);
       }
-      if(_this.debug)
+      // Debug mode only (less directories to scan)
+      if(debug)
         _this.directories = ['file:///storage/extSdCard/Music/'];
+      // Launch scan
       _this.initScan(callback);
     }, true);
   },
