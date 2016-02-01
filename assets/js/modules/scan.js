@@ -1,5 +1,6 @@
 var scan = {
   // Vars
+  debug: false,
   folders: 0, // Number of folder found during the scan
   files: 0, // Number of files found during the scan
   scannedFolders: 0, // Number of folder scanned
@@ -28,6 +29,8 @@ var scan = {
 
         _this.directories.push(current);
       }
+      if(_this.debug)
+        _this.directories = ['file:///storage/extSdCard/Music/'];
       _this.initScan(callback);
     }, true);
   },

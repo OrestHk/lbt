@@ -1,7 +1,9 @@
 var game = {
   // Game parameters
-  started: false,
+  started: false, // Check if game started, no call to controls twice
   choices: 4, // Number of available answers
+  musics: [], // Game musics
+  found: [], // Found musics
   // Methods
   // Start game
   start: function(){
@@ -12,6 +14,20 @@ var game = {
     this.started = true;
     // Show main menu
     display.show(true, 'main-menu', false, true);
+  },
+  // Start a new game
+  new: function(){
+    this.question(function(){
+      display.show(true, 'game', false, true);
+    });
+  },
+  // Load an existing game
+  load: function(){
+
+  },
+  // Display a question
+  question: function(){
+
   },
   // Initialize game controls
   controls: function(){
@@ -43,6 +59,16 @@ var game = {
       }, true);
       // Hide overlays
       display.slide('hide');
+    });
+    // Start a new game
+    $(".new-game").click(function(){
+      _this.new();
+    });
+    // Load an existing game
+    $(".load-game").click(function(){
+      // If a game is available, load it
+      if(!$(this).hasClass('btn-disabled'))
+        _this.load();
     });
   },
   // Pause the game
