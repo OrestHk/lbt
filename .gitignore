@@ -1,7 +1,7 @@
 0_old/
 node_modules/
-platforms/android/
-plugins/cordova-*
-plugins/*
-
 .idea/
+platforms/
+hooks/
+plugins/
+
