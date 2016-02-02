@@ -70,8 +70,9 @@ var scan = {
               // Check if file type is defined
               if(file.type != null && typeof file.type != 'undefined'){
                 // Check if file is an audio file
-                if(file.type.indexOf('audio') != -1)
+                if(file.type.indexOf('audio') != -1 && _this.checkLengthSong(file) && _this.checkMimeType(file)){
                   _this.musics.push(file.localURL);
+                }
               }
               // File scanned !
               _this.scannedFiles++;
@@ -121,4 +122,25 @@ var scan = {
     directory = directory.split(root)[1].split('/')[0];
     return root + directory + '/';
   },
+
+  //check if file is user music or other app sound
+  checkLengthSong: function(file){
+    if(file.end > 1000000)
+      return true;
+    else
+      return false;
+  },
+
+  checkMimeType:function(file){
+    var mime = ['mp3','mp4','mpeg','wav'];
+    var isUserFile = false;
+    var fileMime = file.type.split('/')[1];
+
+    for(var i = 0; i< mime.length - 1;i++){
+      if(fileMime == mime[i])
+        isUserFile = true;
+    }
+
+    return isUserFile;
+  }
 };

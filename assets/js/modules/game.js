@@ -10,6 +10,7 @@ var game = {
       this.controls();
     // Game started
     this.started = true;
+    console.log(storage.musics);
     // Show main menu
     display.show(true, 'main-menu', false, true);
   },

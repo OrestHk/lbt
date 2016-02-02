@@ -18,6 +18,7 @@ var storage = {
       window.resolveLocalFileSystemURL(musics[i], function(music, callback){
         // Get file metadata
         music.file(function(file){
+
           // Check if music already exists in list
           if(!_this.exist(file))
             _this.musics.push(file);

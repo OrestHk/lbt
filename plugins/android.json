@@ -7,13 +7,13 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-file": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.lbt.www"
+        },
+        "org.apache.cordova.file": {
             "PACKAGE_NAME": "com.lbt.www"
         },
         "cordova-plugin-media": {
-            "PACKAGE_NAME": "com.lbt.www"
-        },
-        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.lbt.www"
         }
     },
