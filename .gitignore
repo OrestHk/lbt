@@ -1,5 +1,6 @@
 0_old/
 node_modules/
+.idea/
 platforms/
 hooks/
 plugins/
