@@ -19,6 +19,10 @@ var error = {
       case 10 :
         message = 'Sorry but we didn\'t found any songs on your phone.';
       break;
+      // All musics found
+      case 20 :
+        message = 'Good job you recognize all you songs !';
+      break;
     };
   },
 };

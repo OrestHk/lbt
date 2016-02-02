@@ -20,11 +20,15 @@ var app = {
   },
   // App focus out
   pause: function(){
-    console.log('app focus out');
+    // Pause music
+    if(game.music.media)
+      game.music.media.pause();
   },
   // App focus back
   resume: function(){
-    console.log('app focus back');
+    // Continue music
+    if(game.music.media)
+      game.music.media.play();
   }
 };
 

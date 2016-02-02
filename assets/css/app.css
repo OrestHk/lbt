@@ -10,6 +10,20 @@
 .app .screen.main-menu .btn {
   margin-bottom: 15px; }
 
+.app .screen.game .text-container {
+  margin-bottom: 5px; }
+  .app .screen.game .text-container.found-container {
+    font-size: 16px; }
+
+.app .screen.game .choices {
+  margin-top: 10px; }
+  .app .screen.game .choices .btn {
+    word-break: break-all;
+    margin-bottom: 15px;
+    text-transform: uppercase; }
+    .app .screen.game .choices .btn:last-of-type {
+      margin-bottom: 0; }
+
 .app .overlay.options {
   left: -100%;
   display: block; }

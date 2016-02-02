@@ -17,6 +17,22 @@
       }
       .btn{margin-bottom: $btnMargin;}
     }
+    // Game
+    &.game{
+      .text-container{
+        margin-bottom: 5px;
+        &.found-container{font-size: 16px;}
+      }
+      .choices{
+        margin-top: 10px;
+        .btn{
+          word-break: break-all;
+          margin-bottom: $btnMargin;
+          text-transform: uppercase;
+          &:last-of-type{margin-bottom: 0;}
+        }
+      }
+    }
   }
   // Overlays
   .overlay{

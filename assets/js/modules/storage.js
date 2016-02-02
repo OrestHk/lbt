@@ -22,6 +22,8 @@ var storage = {
           if(!_this.exist(file)){
             // Add an id to the file
             file.id = _this.musics.length;
+            // Add a stiped name (TO IMPROVE)
+            file.stripName = _this.stripName(file.name);
             // Push file into storage musics
             _this.musics.push(file);
           }
@@ -47,9 +49,62 @@ var storage = {
     if(musics != null && typeof musics != 'undefined'){
       // Parse it to set app's musics
       this.musics = JSON.parse(musics);
+      game.musics = this.musics.slice(0);
       return true;
     }
     return false;
+  },
+  // Update user progression
+  update: function(all){
+    // If update all
+    if(all){
+      // Update remains
+      window.localStorage.removeItem('remain');
+      window.localStorage.setItem('remain', JSON.stringify(game.remain));
+      // Update found
+      window.localStorage.removeItem('found');
+      window.localStorage.setItem('found', game.found);
+    }
+    // Update score
+    window.localStorage.removeItem('score');
+    window.localStorage.setItem('score', game.score);
+  },
+  // Get saved game data
+  load: function(){
+    var data = {
+      score: JSON.parse(window.localStorage.getItem('score')),
+      found: JSON.parse(window.localStorage.getItem('found')),
+      remain: JSON.parse(window.localStorage.getItem('remain')),
+    };
+    return data;
+  },
+  // Check if user can load a game
+  game: function(){
+    var score = window.localStorage.getItem('score');
+    var found = window.localStorage.getItem('found');
+    var remain = window.localStorage.getItem('remain');
+    // If remain is found in localStorage
+    if(remain != null && typeof remain != 'undefined'){
+      // If found is found in localStorage
+      if(found != null && typeof found != 'undefined'){
+        // If score is found in localStorage then game can be loaded
+        if(score != null && typeof score != 'undefined')
+          return true;
+        return false;
+      }
+      return false;
+    }
+    return false;
+  },
+  // Clean song name
+  stripName: function(name){
+    // Remove extension
+    var index = name.lastIndexOf('.');
+    name = name.slice(0, index);
+    // Replace [-_] by space
+    name = name.replace(/[_-]/g, ' ');
+
+    return name;
   },
   // Check if file already in musics
   exist: function(file){

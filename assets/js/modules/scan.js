@@ -33,7 +33,7 @@ var scan = {
       }
       // Debug mode only (less directories to scan)
       if(debug)
-        _this.directories = ['file:///storage/extSdCard/Music/'];
+        _this.directories = ['file:///storage/extSdCard/Music'];
       // Launch scan
       _this.initScan(callback);
     }, true);
@@ -71,7 +71,7 @@ var scan = {
         // If entry is a file, check type
         else{
           // If it's an audio file add it to the musics
-          window.resolveLocalFileSystemURL(entry.nativeURL, function(file, cb){
+          window.resolveLocalFileSystemURL(entry.nativeURL, function(file){
             _this.files++;
             file.file(function(file){
               // Check if file type is defined
@@ -92,21 +92,10 @@ var scan = {
               }
             });
           });
-          // Old method
-          // if(entry.nativeURL.indexOf('\.mp3') != -1)
-          //   _this.musics.push(entry.nativeURL);
         }
       }
       // Directory scanned !
       _this.scannedFolders++;
-      // Check if all folders and files have been scanned
-      if(_this.scannedFiles == _this.files && _this.scannedFolders == _this.folders && !_this.finished){
-        _this.finished = true;
-        _this.returnApp();
-        if(callback)
-          callback();
-        //console.log(_this.folders, _this.files, _this.scannedFolders, _this.scannedFiles, _this.finished, _this.directories.length, _this.musics.length);
-      }
     });
   },
   // Reset scan datas
