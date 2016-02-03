@@ -1,7 +1,7 @@
 @import 'settings/conf';
 
 // App
-.app{
+div.app{
   // Screens
   .screen{
     // Splash screen
@@ -36,10 +36,10 @@
   }
   // Overlays
   .overlay{
+    left: -100%;
+    display: block;
     // Options
     &.options{
-      left: -100%;
-      display: block;
       .close{
         width: 30px;
         height: 30px;
@@ -58,6 +58,16 @@
         }
         &:after{transform: translateY(-50%) rotate(45deg);}
         &:before{transform: translateY(-50%) rotate(-45deg);}
+      }
+      .btn{margin-bottom: $btnMargin;}
+      .btn:last-of-type{margin-bottom: 0;}
+    }
+    // Errors
+    &.errors{
+      .specification{
+        display: none;
+        margin-top: 15px;
+        &.error-20{display: block;}
       }
       .btn{margin-bottom: $btnMargin;}
       .btn:last-of-type{margin-bottom: 0;}

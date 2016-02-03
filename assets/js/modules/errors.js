@@ -1,5 +1,6 @@
 var error = {
   // Methods
+  specification: $(".errors .specification"),
   // Check if enought musics have been found to run the app
   musicLength: function(musics){
     if(musics.length < 1){
@@ -12,6 +13,8 @@ var error = {
   // Display a given error message
   display: function(error, optional){
     var message; // Error message
+    // Reset specification class
+    this.specification.removeAttr('class').addClass('specification');
     // Error message handler
     switch(error){
       // Custom error messages
@@ -21,8 +24,13 @@ var error = {
       break;
       // All musics found
       case 20 :
-        message = 'Good job you recognize all you songs !';
+        $(".errors .specification").addClass('error-20');
+        message = 'Good job you recognize all your songs !';
       break;
     };
+    // Append error message
+    $(".errors .message").text(message);
+    // Display error message
+    display.slide('show', 'errors');
   },
 };

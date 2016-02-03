@@ -1,39 +1,39 @@
-.app .screen.splash {
+div.app .screen.splash {
   display: block; }
-  .app .screen.splash .title {
+  div.app .screen.splash .title {
     font-size: 60px; }
 
-.app .screen.main-menu .title {
+div.app .screen.main-menu .title {
   font-size: 46px;
   margin-bottom: 30px; }
 
-.app .screen.main-menu .btn {
+div.app .screen.main-menu .btn {
   margin-bottom: 15px; }
 
-.app .screen.game .text-container {
+div.app .screen.game .text-container {
   margin-bottom: 5px; }
-  .app .screen.game .text-container.found-container {
+  div.app .screen.game .text-container.found-container {
     font-size: 16px; }
 
-.app .screen.game .choices {
+div.app .screen.game .choices {
   margin-top: 10px; }
-  .app .screen.game .choices .btn {
+  div.app .screen.game .choices .btn {
     word-break: break-all;
     margin-bottom: 15px;
     text-transform: uppercase; }
-    .app .screen.game .choices .btn:last-of-type {
+    div.app .screen.game .choices .btn:last-of-type {
       margin-bottom: 0; }
 
-.app .overlay.options {
+div.app .overlay {
   left: -100%;
   display: block; }
-  .app .overlay.options .close {
+  div.app .overlay.options .close {
     width: 30px;
     height: 30px;
     top: 10px;
     right: 10px;
     position: absolute; }
-    .app .overlay.options .close:after, .app .overlay.options .close:before {
+    div.app .overlay.options .close:after, div.app .overlay.options .close:before {
       left: 0;
       top: 50%;
       height: 10%;
@@ -42,11 +42,20 @@
       position: absolute;
       background-color: #fff;
       transform-origin: 50% 50%; }
-    .app .overlay.options .close:after {
+    div.app .overlay.options .close:after {
       transform: translateY(-50%) rotate(45deg); }
-    .app .overlay.options .close:before {
+    div.app .overlay.options .close:before {
       transform: translateY(-50%) rotate(-45deg); }
-  .app .overlay.options .btn {
+  div.app .overlay.options .btn {
     margin-bottom: 15px; }
-  .app .overlay.options .btn:last-of-type {
+  div.app .overlay.options .btn:last-of-type {
+    margin-bottom: 0; }
+  div.app .overlay.errors .specification {
+    display: none;
+    margin-top: 15px; }
+    div.app .overlay.errors .specification.error-20 {
+      display: block; }
+  div.app .overlay.errors .btn {
+    margin-bottom: 15px; }
+  div.app .overlay.errors .btn:last-of-type {
     margin-bottom: 0; }

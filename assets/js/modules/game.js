@@ -31,7 +31,7 @@ var game = {
   // Start a new game
   new: function(){
     // Reset game, if needed
-    this.reset();
+    this.reset(true);
     // Set total music
     this.totalContainer.text(this.musics.length)
     // Give first question
@@ -56,6 +56,18 @@ var game = {
     // Give first question
     this.question(function(){
       display.show(true, 'game', false, true);
+    });
+  },
+  // Continue game after finding all musics
+  continue: function(){
+    // Reset game (not score)
+    this.reset(false);
+    // Give first question
+    this.question(function(){
+      display.show(true, 'game', function(){
+        // Hide overlays (if necessary)
+        display.slide('hide');
+      }, true);
     });
   },
   // Display a question
@@ -166,14 +178,21 @@ var game = {
     this.foundContainer.text(this.found);
   },
   // Reset game, user score,...
-  reset: function(){
+  reset: function(hard){
+    // If hard reset, reset score
+    if(hard)
+      this.score = 0;
     // Reset nbChoices
     this.nbChoices = 4;
-    // Reset score
-    this.score = 0;
+    // Reset found
+    this.found = 0;
     // Initiate musics
     this.musics = storage.musics.slice(0);
     this.remain = storage.musics.slice(0);
+    // Update storage
+    storage.update(true);
+    // Update user stats
+    this.stats();
   },
   // Pause the game
   pause: function(){
@@ -212,6 +231,8 @@ var game = {
     });
     // Start a new game
     $(".new-game").click(function(){
+      // Hide overlays (if necessary)
+      display.slide('hide');
       _this.new();
     });
     // Load an existing game
@@ -219,6 +240,10 @@ var game = {
       // If a game is available, load it
       if(!$(this).hasClass('btn-disabled'))
         _this.load();
+    });
+    // Continue game
+    $(".continue-game").click(function(){
+      _this.continue();
     });
     // Choose answer
     $(".game .choices").on('click', '.btn', function(){
