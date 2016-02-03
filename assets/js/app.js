@@ -11,6 +11,10 @@ var app = {
     document.addEventListener('pause', _this.pause, false);
     // App focus back handler
     document.addEventListener('resume', _this.resume, false);
+    // Exit app handler
+    $(".errors .exit").click(function(){
+      navigator.app.exitApp();
+    });
     // Check if scan already occured
     if(storage.getLocalStore())
       game.start();

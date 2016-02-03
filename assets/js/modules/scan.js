@@ -34,7 +34,7 @@ var scan = {
       }
       // Debug mode only (less directories to scan)
       if(debug)
-        _this.directories = ['file:///storage/extSdCard/Music/Xantah'];
+        _this.directories = ['file:///storage/extSdCard/Android/'];
       // Launch scan
       _this.initScan(callback);
     }, true);
