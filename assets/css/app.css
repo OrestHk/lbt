@@ -10,6 +10,25 @@ div.app .screen.main-menu .title {
 div.app .screen.main-menu .btn {
   margin-bottom: 15px; }
 
+div.app .screen.game .open-menu {
+  width: 30px;
+  height: 25px;
+  top: 10px;
+  left: 10px;
+  position: absolute; }
+  div.app .screen.game .open-menu:after, div.app .screen.game .open-menu:before {
+    top: 0;
+    left: 20%;
+    width: 20%;
+    height: 100%;
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    transform-origin: 50% 50%; }
+  div.app .screen.game .open-menu:before {
+    right: 20%;
+    left: initial; }
+
 div.app .screen.game .text-container {
   margin-bottom: 5px; }
   div.app .screen.game .text-container.found-container {
@@ -18,7 +37,7 @@ div.app .screen.game .text-container {
 div.app .screen.game .choices {
   margin-top: 10px; }
   div.app .screen.game .choices .btn {
-    word-break: break-all;
+    word-break: break-word;
     margin-bottom: 15px;
     text-transform: uppercase; }
     div.app .screen.game .choices .btn:last-of-type {

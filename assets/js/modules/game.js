@@ -8,6 +8,7 @@ var game = {
   loadGame: $(".main-menu .load-game"),
   // Vars
   started: false, // Check if game started, no call to controls twice
+  paused: false, // Check if game is paused
   musics: [], // Game musics
   remain: [], // Remaining musics to find
   choices: [], // Current question choices
@@ -77,6 +78,8 @@ var game = {
     // Stop music
     if(this.music.media)
       this.music.media.stop();
+    // Reset pause
+    this.paused = false;
     // Reset music
     this.music = {};
     // Reset choices
@@ -152,6 +155,9 @@ var game = {
       }
       // Update storage
       storage.update(true);
+      // Allow load game
+      if(this.loadGame.hasClass('btn-disabled'))
+        this.loadGame.removeClass('btn-disabled');
     }
     // If reponse is incorrect
     else{
@@ -196,18 +202,34 @@ var game = {
   },
   // Pause the game
   pause: function(){
-
+    this.paused = true;
+    // Check if in game
+    if(this.music.media)
+      // Pause the game
+      this.music.media.pause();
+  },
+  // Resume the game, if playing
+  resume: function(){
+    this.paused = false;
+    // Check if in game
+    if(this.music.media)
+      // Pause the game
+      this.music.media.play();
   },
   // Initialize game controls
   controls: function(){
     var _this = this;
     // Open options menu
-    $(".options-game").click(function(){
+    $(".options-game, .open-menu").click(function(){
       display.slide('show', 'options');
+      // Pause game
+      _this.pause();
     });
     // Close options menu
     $(".options .close").click(function(){
       display.slide('hide', 'options');
+      // Resume game
+      _this.resume();
     });
     // Return to menu
     $(".options .return-menu").click(function(){

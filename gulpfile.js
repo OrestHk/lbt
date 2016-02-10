@@ -75,3 +75,7 @@ gulp.task('watch', function(){
   gulp.watch(paths.css.source+'**/*.+(sass|scss|css)', ['css']);
 });
 /* End watchers */
+
+/* Build */
+gulp.task('build', ['css', 'jsLibs', 'jsScripts']);
+/* End build */

@@ -31,7 +31,7 @@ var app = {
   // App focus back
   resume: function(){
     // Continue music
-    if(game.music.media)
+    if(game.music.media && !game.paused)
       game.music.media.play();
   }
 };

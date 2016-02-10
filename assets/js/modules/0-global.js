@@ -1,2 +1,2 @@
 var root = 'file:///';
-var debug = false;
+var debug = true;
