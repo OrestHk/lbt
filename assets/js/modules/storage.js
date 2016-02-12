@@ -3,19 +3,23 @@ var storage = {
   musics: [],
   // Methods
   // Get musics from scan
-  getMusics: function(musics){
+  getMusics: function(musics, callback){
+    // Reset musics after new scan
+    this.musics = [];
+    // Check if enough musics
     if(error.musicLength(musics))
-      this.store(musics);
+      // Store found musics
+      this.store(musics, callback);
   },
   // Store founded music in current app instance and local storage
-  store: function(musics){
+  store: function(musics, callback){
     var _this = this;
     var i = 0;
     var treated = 0; // Count treated files (because of async file function)
     var nbMusics = musics.length;
     // Loop through each music to get metadata
     for(i; i < nbMusics; i++){
-      window.resolveLocalFileSystemURL(musics[i], function(music, callback){
+      window.resolveLocalFileSystemURL(musics[i], function(music, cb){
         // Get file metadata
         music.file(function(file){
           // Check if music already exists in list
@@ -30,8 +34,14 @@ var storage = {
           treated++;
           // Check if all musics have been scanned
           if(treated == nbMusics){
+            // Store found musics
             _this.localStore();
-            game.start();
+            // Call callback if exist
+            if(callback)
+              callback();
+            // Init the game
+            else
+              game.start();
           }
         });
       });

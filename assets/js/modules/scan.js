@@ -15,7 +15,6 @@ var scan = {
     var directory;
     // In case the user wants to refresh his inapp song list
     this.resetScan();
-    //console.log(this.folders, this.files, this.scannedFolders, this.scannedFiles, this.finished, this.directories.length, this.musics.length);
     // Show loader
     display.show(true, 'loader', function(){
       // Loop through cordova.file directories
@@ -89,10 +88,7 @@ var scan = {
               // Check if all folders and files have been scanned
               if(_this.scannedFiles == _this.files && _this.scannedFolders == _this.folders && !_this.finished){
                 _this.finished = true;
-                _this.returnApp();
-                if(callback)
-                  callback();
-                //console.log(_this.folders, _this.files, _this.scannedFolders, _this.scannedFiles, _this.finished, _this.directories.length, _this.musics.length);
+                _this.returnApp(callback);
               }
             });
           });
@@ -113,8 +109,8 @@ var scan = {
     this.musics = [];
   },
   // Return what was found to the app
-  returnApp: function(){
-    storage.getMusics(this.musics);
+  returnApp: function(callback){
+    storage.getMusics(this.musics, callback);
   },
   // Strip directory to one folder after root
   stripDirectory: function(directory){

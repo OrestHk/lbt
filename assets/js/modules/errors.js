@@ -28,6 +28,11 @@ var error = {
         $(".errors .error-20").addClass('show');
         message = 'Good job you recognize all your songs !';
       break;
+      // After refresh message
+      case 30 :
+        $(".errors .error-30").addClass('show');
+        message = 'Refresh completed successfully !';
+      break;
     };
     // Append error message
     $(".errors .message").text(message);

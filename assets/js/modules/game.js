@@ -7,8 +7,10 @@ var game = {
   totalContainer: $(".game .total"),
   loadGame: $(".main-menu .load-game"),
   // Vars
+  refreshed: false, // Check if musics have been refreshed
   started: false, // Check if game started, no call to controls twice
   paused: false, // Check if game is paused
+  inGame: false, // Check if user is in game
   musics: [], // Game musics
   remain: [], // Remaining musics to find
   choices: [], // Current question choices
@@ -31,8 +33,14 @@ var game = {
   },
   // Start a new game
   new: function(){
-    // Reset game, if needed
-    this.reset(true);
+    // User is in game
+    this.inGame = true;
+    if(!this.refreshed)
+      // Reset game, if needed
+      this.reset(true);
+    // Update datas with new musics
+    else
+      this.refresh();
     // Set total music
     this.totalContainer.text(this.musics.length)
     // Give first question
@@ -42,6 +50,8 @@ var game = {
   },
   // Load an existing game
   load: function(){
+    // User is in game
+    this.inGame = true;
     // Get saved datas
     var data = storage.load();
     // Update score
@@ -62,7 +72,11 @@ var game = {
   // Continue game after finding all musics
   continue: function(){
     // Reset game (not score)
-    this.reset(false);
+    if(!this.refreshed)
+      this.reset(false);
+    // Update datas with new musics
+    else
+      this.refresh();
     // Give first question
     this.question(function(){
       display.show(true, 'game', function(){
@@ -95,7 +109,7 @@ var game = {
     }
 
     // Question vars
-    var exclusion = []; // Songs to exclude (already in choices)
+    var exclusion = []; // Musics to exclude (already in choices)
     var remain = this.remain.length - 1; // Length array remaining musics
     var btns = []; // Buttons html elements
     var i = 0; // Iteration var
@@ -103,7 +117,7 @@ var game = {
     // Questions creation
     for(i; i < this.nbChoices; i++){
       // Get random integer
-      var rand = this.getRand(0, remain, exclusion);
+      var rand = this.rand(0, remain, exclusion);
       // Get random music
       var music = this.remain[rand];
       // Push music in choices
@@ -200,6 +214,43 @@ var game = {
     // Update user stats
     this.stats();
   },
+  // Refresh user stats after music list refresh
+  refresh: function(){
+    // Get previous found musics
+    var found = this._found();
+    // Reset game (not score)
+    this.reset();
+    // Check if musics have been found in the new list
+    var i = 0; // Iteration var
+    var nbFound = found.length; // Number of previous musics found
+    // Check if previously found music still exist after new scan
+    for(i; i < nbFound; i++){
+      var j = 0; // Iteration var
+      var nbMusics = this.remain.length; // Number of newly scanned musics
+      for(j; j < nbMusics; j++){
+        // Check if music has the same name
+        if(found[i].name == this.remain[j].name){
+          // Check if music has the same size
+          if(found[i].size == this.remain[j].size){
+            // Remove musics from remaining onces
+            this.remain.splice(j, 1);
+            // Break the loop
+            break;
+          }
+        }
+      }
+    }
+    // Update found
+    this.found = this.musics.length - this.remain.length;
+    // Update user stats
+    this.stats();
+    // Set total music
+    this.totalContainer.text(this.musics.length);
+    // Refresh musics
+    // storage.localStore();
+    // Reset refreshed
+    this.refreshed = false;
+  },
   // Pause the game
   pause: function(){
     this.paused = true;
@@ -212,7 +263,7 @@ var game = {
   resume: function(){
     this.paused = false;
     // Check if in game
-    if(this.music.media)
+    if(this.music.media && this.inGame == true)
       // Pause the game
       this.music.media.play();
   },
@@ -233,6 +284,8 @@ var game = {
     });
     // Return to menu
     $(".options .return-menu").click(function(){
+      // User is in game
+      this.inGame = false;
       // Pause game
       _this.pause();
       // Show main menu
@@ -242,10 +295,12 @@ var game = {
     });
     // Refresh musics list
     $(".options .refresh-music").click(function(){
+      // Musics will be refresh
+      _this.refreshed = true;
       // Show main menu
       display.show(true, 'loader', function(){
         scan.listDirectories(function(){
-          console.log('Musics refreshed');
+          error.display(30);
         });
       }, true);
       // Hide overlays
@@ -272,8 +327,29 @@ var game = {
       _this.answer($(this));
     });
   },
+  // Get found musics
+  _found: function(){
+    var found = this.musics.slice(0); // Found musics
+    var i = 0; // Iteration var
+    var nbRemain = this.remain.length; // Number of musics remaining
+    for(i; i < nbRemain; i++){
+      var j = 0; // Iteration var
+      var nbFound = found.length; // Number of musics found
+      for(j; j < nbFound; j++){
+        // If music if part of the remaining
+        if(found[j].id == this.remain[i].id){
+          // Remove it
+          found.splice(j, 1);
+          // Break the loop
+          break;
+        }
+      }
+    }
+    // Return found musics array
+    return found;
+  },
   // Get a random integer between min and max different of exclusion
-  getRand: function(min, max, exclusion){
+  rand: function(min, max, exclusion){
     // Get random integer between min and max
     var random = Math.floor(Math.random() * (max - min + 1)) + min;
     // Check if there is exclusions
