@@ -285,7 +285,7 @@ var game = {
     // Return to menu
     $(".options .return-menu").click(function(){
       // User is in game
-      this.inGame = false;
+      _this.inGame = false;
       // Pause game
       _this.pause();
       // Show main menu
