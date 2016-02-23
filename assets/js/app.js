@@ -17,6 +17,11 @@ var app = {
     $(".errors .exit").click(function(){
       navigator.app.exitApp();
     });
+    // Allow scan
+    $(".errors .allow-scan").click(function(){
+      display.slide('hide');
+      scan.listDirectories();
+    });
     // Check if scan already occured
     if(storage.getLocalStore())
       game.start();

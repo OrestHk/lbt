@@ -24,18 +24,29 @@ var scan = {
         // If null or undefined, pass it
         if(current == null || typeof current == 'undefined')
           continue;
-        // Strip directory to make it usable
-        current = _this.stripDirectory(current);
         if(_this.directories.indexOf(current) != -1)
           continue;
         // Push it to directories to scan
         _this.directories.push(current);
+        // Strip directory to make it usable
+        stripped = _this.stripDirectory(current);
+        if(_this.directories.indexOf(stripped) != -1)
+          continue;
+        // Push it to directories to scan
+        _this.directories.push(stripped);
       }
       // Debug mode only (less directories to scan)
       if(debug)
-        _this.directories = ['file:///storage/extSdCard/Music/Test/'];
-      // Launch scan
-      _this.initScan(callback);
+        _this.directories = ['file:///sdcard/'];
+      // Get permissions to look through user datas if necessary
+      perm.get('WRITE_EXTERNAL_STORAGE').then(function(result){
+        // Launch scan
+        if(result)
+          _this.initScan(callback);
+        // Display scan denied error
+        else
+          error.display(40);
+      });
     }, true);
   },
   // Launch scan for each principal directories
@@ -65,11 +76,13 @@ var scan = {
         var entry = entries[i];
         // If entry is a directory, scan the directory
         if(entry.isDirectory){
+          console.log('D : ' + entry.nativeURL);
           _this.folders++;
           _this.scanDirectory(entry, callback);
         }
         // If entry is a file, check type
         else{
+          console.log('F : ' + entry.nativeURL);
           // If it's an audio file add it to the musics
           window.resolveLocalFileSystemURL(entry.nativeURL, function(file){
             _this.files++;

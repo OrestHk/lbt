@@ -33,6 +33,11 @@ var error = {
         $(".errors .error-30").addClass('show');
         message = 'Refresh completed successfully !';
       break;
+      // Scan through files denied
+      case 40 :
+        $(".errors .error-40").addClass('show');
+        message = 'LBT is based on the musics we can find on your phone, no worries we won\'t share your depest secrets :)';
+      break;
     };
     // Append error message
     $(".errors .message").text(message);
