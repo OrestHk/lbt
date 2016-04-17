@@ -9,6 +9,10 @@ div.app{
       display: block;
       .title{font-size: 60px;}
     }
+    // Loading screen
+    &.loader{
+      .text-small{font-size: 16px;}    
+    }
     // Main menu
     &.main-menu{
       .title{

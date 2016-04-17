@@ -3,6 +3,9 @@ div.app .screen.splash {
   div.app .screen.splash .title {
     font-size: 60px; }
 
+div.app .screen.loader .text-small {
+  font-size: 16px; }
+
 div.app .screen.main-menu .title {
   font-size: 46px;
   margin-bottom: 30px; }
